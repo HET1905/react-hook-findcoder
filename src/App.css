@@ -1,0 +1,115 @@
+body {
+  /* background-image: linear-gradient(to top, #da1670, #ca0081, #af0096, #8600ac, #330bc1); */
+  background-color: #da1670;
+}
+
+.card {
+  width: 11rem;
+  height: 15rem;
+}
+
+.cardContainer {
+  margin-top: 10px;
+  box-shadow: 3px 3px 3px rgb(5, 5, 5);
+  /* border: 2px solid #000; */
+  /* border-radius: 0.25em */
+}
+
+.card:hover {
+  /* padding: 2px; */
+  padding: 2px;
+  cursor: pointer;
+  background-image: linear-gradient(to left top,
+      #facb06,
+      #ed9514,
+      #d26324,
+      #ac352b,
+      #7e082a);
+}
+
+.container-fluid,
+.container {
+  padding: 0;
+}
+
+.navbar-brand {
+  font-family: "Satisfy", cursive;
+  font-size: 1em;
+  font-weight: bolder;
+}
+
+i.fa {
+  font-size: 1.2em;
+  color: rgb(25, 2, 88);
+  padding-right: 10px;
+}
+
+form,
+input {
+  margin-top: 10px;
+}
+
+input.btn {
+  margin-right: 10px;
+  width: 100px;
+}
+
+.alert-light {
+  background: rgba(202, 4, 4, 0.548);
+  margin-top: 10px;
+  padding: 2px;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+#navUl {
+  display: flex;
+  list-style: none;
+  /* color: #fff; */
+}
+
+#navUl a {
+  color: #000;
+  font-weight: bolder;
+}
+
+#navUl a:hover {
+  color: #fff;
+}
+
+#navUl li {
+  margin-left: 5px;
+  padding-left: 10px;
+}
+
+.badge {
+  width: 130px;
+  height: 35px;
+  margin-right: 5px;
+  margin-top: 5px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.infoCard {
+  display: flex;
+  padding: 10px;
+  margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+
+}
+
+.cardUser:hover {
+  background: #222;
+  color: #fff;
+  ;
+}
+
+
+/* 
+.container {
+    width: 100%;
+    white-space: nowrap;
+} */
