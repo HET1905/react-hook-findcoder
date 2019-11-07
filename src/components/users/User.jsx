@@ -1,42 +1,37 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../layouts/Spinner";
 import Repolist from "../repo/Repolist";
 
-class User extends Component {
-  componentDidMount() {
-    this.props.getUser(this.props.match.params.login);
-    this.props.getUserRepo(this.props.match.params.login);
-  }
-  static propTypes = {
-    getUser: PropTypes.func.isRequired,
-    getUserRepo: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired
-  };
-  render() {
-    const {
-      name,
-      avatar_url,
-      blog,
-      bio,
-      followers,
-      following,
-      public_gists,
-      public_repos,
-      location,
-      hireable,
-      html_url
-    } = this.props.user;
+const User = ({ user, getUser, getUserRepo, match, loading, repos }) => {
+  useEffect(() => {
+    getUser(match.params.login);
+    getUserRepo(match.params.login);
+    // eslint-disable-next-line
+  }, []);
 
-    const { loading, repos } = this.props;
+  const {
+    name,
+    avatar_url,
+    blog,
+    bio,
+    followers,
+    following,
+    public_gists,
+    public_repos,
+    location,
+    hireable,
+    html_url
+  } = user;
 
-    if (loading) return <Spinner />;
-    return (
-      <div>
+  if (loading) return <Spinner />;
+
+  return (
+    <div className="row">
+      <div className="col-12 col-md-8">
         <div
           className="card cardUser mt-2 px-2 text-center"
-          style={{ width: "600px", height: "auto" }}
+          style={{ width: "700px", height: "auto" }}
         >
           <h1 className="card-title">{name}</h1>
           <h4>{location}</h4>
@@ -68,7 +63,7 @@ class User extends Component {
         </div>
         <div
           className="card infoCard"
-          style={{ width: "600px", height: "auto" }}
+          style={{ width: "700px", height: "auto" }}
         >
           <span className="badge badge-primary">Followers : {followers}</span>
           <span className="badge badge-secondary">Following : {following}</span>
@@ -79,9 +74,17 @@ class User extends Component {
             Public Gists : {public_gists}
           </span>
         </div>
+      </div>
+      <div className="col-12 col-md-4">
         <Repolist repos={repos} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+User.propTypes = {
+  getUser: PropTypes.func.isRequired,
+  getUserRepo: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
+};
 export default User;
