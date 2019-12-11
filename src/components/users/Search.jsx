@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
+import GithubContext from "../../context/github/githubContext";
+import AlertContext from "../../context/alert/alertContext";
 
-// import Button from "react-bootstrap/Button";
+const Search = ({ setAlerts }) => {
+  const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
 
-const Search = ({ showClear, clearUsers, searchUsers, setAlerts }) => {
   const [text, setText] = useState("");
 
   const onChange = e => setText(e.target.value);
@@ -12,10 +15,10 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlerts }) => {
   const onSubmit = e => {
     e.preventDefault();
     if (text === "") {
-      setAlerts("Please enter the words to search..", "light");
+      alertContext.setAlert("Please enter the words to search..", "light");
     } else {
       // passing the props to upper level
-      searchUsers(text);
+      githubContext.searchUsers(text);
       setText("");
     }
   };
@@ -30,18 +33,15 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlerts }) => {
           onChange={onChange}
           placeholder="Search coders......."
         />
-        {/* <Button variant="primary" type="submit">
-            Submit
-          </Button> */}
 
         <input type="submit" value="Search" className="btn btn-primary" />
 
-        {showClear && (
+        {githubContext.users.length > 0 && (
           <input
             type="button"
             className="btn btn-light"
             value="Clear"
-            onClick={clearUsers}
+            onClick={githubContext.clearUsers}
           />
         )}
       </Form>
@@ -49,9 +49,6 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlerts }) => {
   );
 };
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   setAlerts: PropTypes.func.isRequired
 };
 export default Search;
